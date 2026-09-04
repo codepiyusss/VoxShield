@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clone-Catch | Voice Security</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="grid-bg"></div>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">🛡️</div>
+
+            <div>
+                <h2>CLONE<span>-CATCH</span></h2>
+                <small>VOICE SECURITY SYSTEM</small>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#analysis">Analysis</a>
+            <a href="#how">How It Works</a>
+            <a href="#features">Features</a>
+        </nav>
+
+        <div class="system-status">
+            <span></span>
+            SYSTEM ONLINE
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <div class="hero-left">
+
+            <div class="badge">
+                <span class="pulse"></span>
+                AI-POWERED VOICE PROTECTION
+            </div>
+
+            <h1>
+                Detect The Voice.<br>
+                <span>Protect The Identity.</span>
+            </h1>
+
+            <p>
+                Clone-Catch uses AI-powered voice analysis to identify
+                synthetic and cloned voices before they become
+                impersonation threats.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="primary-btn" onclick="scrollToAnalysis()">
+                    🎙 Analyze Voice
+                    <span>→</span>
+                </button>
+
+                <button class="secondary-btn" onclick="scrollToHow()">
+                    Explore Technology
+                </button>
+
+            </div>
+
+            <div class="trust-row">
+
+                <div>
+                    <strong>AI</strong>
+                    <small>Powered</small>
+                </div>
+
+                <div>
+                    <strong>REAL-TIME</strong>
+                    <small>Detection</small>
+                </div>
+
+                <div>
+                    <strong>SECURE</strong>
+                    <small>Analysis</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HERO VISUAL -->
+        <div class="hero-right">
+
+            <div class="scanner">
+
+                <div class="scanner-ring ring-one"></div>
+                <div class="scanner-ring ring-two"></div>
+
+                <div class="scanner-core">
+
+                    <div class="shield">🛡️</div>
+
+                    <div class="core-text">
+                        <small>VOICE INTEGRITY</small>
+                        <strong>VERIFIED</strong>
+                    </div>
+
+                </div>
+
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+
+            </div>
+
+            <div class="floating-card card-top">
+                <span>●</span>
+                LIVE MONITORING
+            </div>
+
+            <div class="floating-card card-bottom">
+                <small>THREAT LEVEL</small>
+                <strong>LOW</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ANALYSIS -->
+    <section class="analysis-section" id="analysis">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-tag">01 / VOICE ANALYSIS</span>
+
+                <h2>
+                    Verify A <span>Voice.</span>
+                </h2>
+
+                <p>
+                    Upload an audio file and let Clone-Catch inspect
+                    its acoustic and behavioral fingerprints.
+                </p>
+            </div>
+
+            <div class="live-indicator">
+                <span></span>
+                ANALYSIS ENGINE READY
+            </div>
+
+        </div>
+
+
+        <div class="analysis-grid">
+
+            <!-- UPLOAD -->
+            <div class="upload-panel">
+
+                <div class="panel-header">
+                    <span>VOICE INPUT</span>
+                    <span class="panel-number">01</span>
+                </div>
+
+                <div class="upload-box" id="uploadBox">
+
+                    <div class="upload-icon">
+                        🎙️
+                    </div>
+
+                    <h3>Drop your audio here</h3>
+
+                    <p>
+                        MP3, WAV, M4A or other audio formats
+                    </p>
+
+                    <label for="audioFile" class="browse-btn">
+                        Browse Audio
+                    </label>
+
+                    <input
+                        type="file"
+                        id="audioFile"
+                        accept="audio/*"
+                        hidden
+                    >
+
+                    <div class="selected-file" id="fileName">
+                        No file selected
+                    </div>
+
+                </div>
+
+                <button class="analyze-btn" id="analyzeBtn">
+                    <span>RUN AI ANALYSIS</span>
+                    <span>→</span>
+                </button>
+
+                <div class="loading" id="loading">
+                    <div class="loader"></div>
+                    <span>Analyzing voice fingerprint...</span>
+                </div>
+
+            </div>
+
+
+            <!-- SCORE -->
+            <div class="score-panel">
+
+                <div class="panel-header">
+                    <span>AUTHENTICITY SCORE</span>
+                    <span class="panel-number">02</span>
+                </div>
+
+                <div class="score-circle">
+
+                    <div class="score-inner">
+                        <strong id="score">--</strong>
+                        <small>%</small>
+                        <span>AUTHENTIC</span>
+                    </div>
+
+                </div>
+
+                <div class="result-message" id="resultMessage">
+                    Upload an audio file to begin analysis.
+                </div>
+
+                <div class="risk-box">
+
+                    <div>
+                        <small>THREAT LEVEL</small>
+                        <strong id="risk">WAITING</strong>
+                    </div>
+
+                    <div class="risk-dot" id="riskDot"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI FINGERPRINT -->
+        <div class="fingerprint-panel">
+
+            <div class="panel-header">
+                <span>AI VOICE FINGERPRINT</span>
+                <span class="panel-number">03</span>
+            </div>
+
+            <div class="fingerprint-grid">
+
+                <div class="fingerprint-card">
+                    <span>01</span>
+                    <strong>ACOUSTIC</strong>
+                    <small>Voice texture & frequency</small>
+                    <div class="mini-bar"><i></i></div>
+                </div>
+
+                <div class="fingerprint-card">
+                    <span>02</span>
+                    <strong>SPECTRAL</strong>
+                    <small>Frequency distribution</small>
+                    <div class="mini-bar"><i></i></div>
+                </div>
+
+                <div class="fingerprint-card">
+                    <span>03</span>
+                    <strong>PROSODY</strong>
+                    <small>Rhythm & speech pattern</small>
+                    <div class="mini-bar"><i></i></div>
+                </div>
+
+                <div class="fingerprint-card">
+                    <span>04</span>
+                    <strong>AI SIGNATURE</strong>
+                    <small>Synthetic voice indicators</small>
+                    <div class="mini-bar"><i></i></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section" id="how">
+
+        <div class="section-title-center">
+
+            <span class="section-tag">02 / THE TECHNOLOGY</span>
+
+            <h2>
+                How <span>Clone-Catch</span> Works
+            </h2>
+
+            <p>
+                Four layers of intelligent voice security.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-number">01</div>
+                <div class="step-icon">🎙️</div>
+                <h3>INPUT</h3>
+                <p>Voice audio enters the detection system.</p>
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <div class="step-icon">🔬</div>
+                <h3>ANALYZE</h3>
+                <p>AI extracts acoustic and spectral features.</p>
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <div class="step-icon">🤖</div>
+                <h3>DETECT</h3>
+                <p>AI identifies synthetic voice patterns.</p>
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step">
+                <div class="step-number">04</div>
+                <div class="step-icon">🚨</div>
+                <h3>PROTECT</h3>
+                <p>Risk score and security alerts are generated.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features-section" id="features">
+
+        <div class="section-title-center">
+
+            <span class="section-tag">03 / SECURITY LAYERS</span>
+
+            <h2>
+                Built For <span>Voice Security</span>
+            </h2>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Real-Time Detection</h3>
+                <p>Analyze voice streams and identify suspicious patterns quickly.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>AI Voice Analysis</h3>
+                <p>Analyze acoustic, spectral and behavioral voice characteristics.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Dynamic Risk Score</h3>
+                <p>Convert AI analysis into an easy-to-understand threat score.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🚨</div>
+                <h3>Instant Alerts</h3>
+                <p>Flag potentially cloned voices before impersonation succeeds.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            🛡️ CLONE-CATCH
+        </div>
+
+        <p>
+            Protecting digital communication against audio deepfakes.
+        </p>
+
+        <div class="footer-status">
+            <span></span>
+            SECURITY ENGINE ONLINE
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
