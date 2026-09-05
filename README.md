@@ -56,20 +56,20 @@ Output: REAL or FAKE, with confidence score
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 
-| Component | Purpose |
-|---|---|
-| librosa | Audio processing, MFCC feature extraction |
-| scikit-learn | Classifier training and evaluation |
-| sounddevice | Live microphone input |
-| joblib | Model saving and loading |
-| Flask | Backend API connecting model to frontend |
-| HTML, CSS, JavaScript | Frontend interface |
+|Component              | Purpose                                   |
+|-----------------------|-------------------------------------------|
+| librosa               | Audio processing, MFCC feature extraction |
+| scikit-learn          | Classifier training and evaluation        |
+| sounddevice           | Live microphone input                     |
+| joblib                | Model saving and loading                  |
+| Flask                 | Backend API connecting model to frontend  |
+| HTML, CSS, JavaScript | Frontend interface                        |
 
 ## Dataset
 
 The model is trained on a combination of:
 
-- Real voice samples: sourced from the IndieFake Dataset, an academic dataset of Indian speakers (Kumar et al., 2025), specifically its Bonafide (genuine) recordings
+- Real voice samples: sourced from the IndieFake Dataset, and few of found by team
 - Fake voice samples: synthetically generated using Microsoft Edge text-to-speech, using Indian-accented English and Hindi voices, to ensure the fake class reflects realistic Indian-context synthetic speech
 
 Dataset was balanced across both classes before training to avoid classifier bias toward the majority class.
@@ -142,9 +142,6 @@ This project currently focuses on detection only. The following are identified a
 ## Related Work
 
 This project is informed by and builds on findings from recent academic research in deepfake voice detection, including:
-
-- Kumar et al., IndieFake Dataset (2025), which highlights the underrepresentation of Indian speakers in existing deepfake detection datasets
-- Saxena et al., AI Powered Deepfake Voice and Scam Call Detector for Secure Communication (2025), ICSIAIML
 
 ## Team
 
