@@ -150,7 +150,12 @@ This project is informed by and builds on findings from recent academic research
 
 ## Team
 
-- 
+- [Piyush Tiwari](https://github.com/codepiyusss) (Leader)
+- [Siddhatha Kumar](https://github.com/DevSid740)
+- [Abhihek Dwivedi](https://github.com/abhishekdwivedi3686-max)
+- [Anjali Kumari](https://github.com/anjalikumari469)
+- [Lucky Kumari](https://github.com/lucky-mehta)
+- [Aman Dubey](https://github.com/amandubey0605)
 
 ## License
 
