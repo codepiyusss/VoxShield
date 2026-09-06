@@ -74,27 +74,6 @@ The model is trained on a combination of:
 
 Dataset was balanced across both classes before training to avoid classifier bias toward the majority class.
 
-## Project Structure
-
-```
-VoxShield/
-  dataset/
-    real/                         # Real voice audio files
-    fake/                         # Synthetic voice audio files
-  data_prep_scripts/
-    flatten_bonafides.py          # Organizes real audio from source dataset
-    generate_fake_audio.py        # Generates synthetic audio samples
-  train_model.py                  # Extracts features and trains the classifier
-  live_detect.py                  # Runs live microphone detection
-  voice_model.pkl                 # Saved trained model (generated after training)
-  FrontendDesign/
-    index.html
-    style.css
-    script.js
-  requirements.txt
-  README.md
-```
-
 ## How It Works
 
 ### 1. Feature Extraction
@@ -146,8 +125,8 @@ This project is informed by and builds on findings from recent academic research
 ## Team
 
 - [Piyush Tiwari](https://github.com/codepiyusss) (Leader)
-- [Siddhatha Kumar](https://github.com/DevSid740)
-- [Abhihek Dwivedi](https://github.com/abhishekdwivedi3686-max)
+- [Siddhartha Kumar](https://github.com/DevSid740)
+- [Abhishek Dwivedi](https://github.com/abhishekdwivedi3686-max)
 - [Anjali Kumari](https://github.com/anjalikumari469)
 - [Lucky Kumari](https://github.com/lucky-mehta)
 - [Aman Dubey](https://github.com/amandubey0605)
