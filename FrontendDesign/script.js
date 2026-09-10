@@ -1,256 +1,156 @@
-// ================================
-// CLONE-CATCH
-// Voice Security Frontend
-// ================================
+const tabButtons = document.querySelectorAll(".tab-btn");
+const panels = {
+  upload: document.getElementById("panel-upload"),
+  record: document.getElementById("panel-record"),
+};
 
-const audioFile = document.getElementById("audioFile");
-const fileName = document.getElementById("fileName");
-const analyzeBtn = document.getElementById("analyzeBtn");
-const loading = document.getElementById("loading");
+const dropzone = document.getElementById("dropzone");
+const fileInput = document.getElementById("file-input");
+const fileNameEl = document.getElementById("file-name");
+const analyzeBtn = document.getElementById("analyze-btn");
 
-const score = document.getElementById("score");
-const risk = document.getElementById("risk");
-const riskDot = document.getElementById("riskDot");
-const resultMessage = document.getElementById("resultMessage");
+const recordBtn = document.getElementById("record-btn");
+const recordStatus = document.getElementById("record-status");
 
-const uploadBox = document.getElementById("uploadBox");
-const scoreCircle = document.querySelector(".score-circle");
+const resultCard = document.getElementById("result-card");
+const resultLabel = document.getElementById("result-label");
+const resultSub = document.getElementById("result-sub");
+const confidenceFill = document.getElementById("confidence-fill");
+const resetBtn = document.getElementById("reset-btn");
+
+let selectedAudioSource = null; // holds either an uploaded File or recorded
 
 
-// ================================
-// FILE SELECTION
-// ================================
+tabButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    tabButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
 
-audioFile.addEventListener("change", function () {
+    const target = btn.dataset.tab;
+    Object.keys(panels).forEach((key) => {
+      panels[key].classList.toggle("hidden", key !== target);
+    });
 
-    if (audioFile.files.length > 0) {
-
-        const file = audioFile.files[0];
-
-        fileName.textContent = "✓ " + file.name;
-
-        uploadBox.style.borderColor = "#32d9ff";
-
-    } else {
-
-        fileName.textContent = "No file selected";
-
-    }
-
+    resetSelection();
+  });
 });
 
-
-// ================================
-// DRAG & DROP
-// ================================
-
-uploadBox.addEventListener("dragover", function (event) {
-
-    event.preventDefault();
-
-    uploadBox.style.borderColor = "#32d9ff";
-
+fileInput.addEventListener("change", () => {
+  if (fileInput.files.length > 0) {
+    setSelectedFile(fileInput.files[0]);
+  }
 });
 
-uploadBox.addEventListener("dragleave", function () {
-
-    uploadBox.style.borderColor = "rgba(50,217,255,0.25)";
-
+dropzone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  dropzone.style.borderColor = "var(--color-accent)";
 });
 
-uploadBox.addEventListener("drop", function (event) {
-
-    event.preventDefault();
-
-    const files = event.dataTransfer.files;
-
-    if (files.length > 0) {
-
-        audioFile.files = files;
-
-        fileName.textContent = "✓ " + files[0].name;
-
-        uploadBox.style.borderColor = "#32d9ff";
-
-    }
-
+dropzone.addEventListener("dragleave", () => {
+  dropzone.style.borderColor = "var(--color-border)";
 });
 
+dropzone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  dropzone.style.borderColor = "var(--color-border)";
+  if (e.dataTransfer.files.length > 0) {
+    setSelectedFile(e.dataTransfer.files[0]);
+  }
+});
 
-// ================================
-// ANALYZE VOICE
-// ================================
+function setSelectedFile(file) {
+  selectedAudioSource = file;
+  fileNameEl.textContent = file.name;
+  analyzeBtn.disabled = false;
+}
 
-analyzeBtn.addEventListener("click", function () {
+let mediaRecorder = null;
+let recordedChunks = [];
+let isRecording = false;
 
-    if (audioFile.files.length === 0) {
+recordBtn.addEventListener("click", async () => {
+  if (!isRecording) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      recordedChunks = [];
 
-        alert("Please upload an audio file first.");
-
-        return;
-
-    }
-
-    // Hide previous result
-    score.textContent = "--";
-
-    risk.textContent = "ANALYZING";
-
-    resultMessage.textContent =
-        "AI engine is analyzing the voice fingerprint...";
-
-    // Show loading
-    loading.style.display = "flex";
-
-    analyzeBtn.disabled = true;
-
-    analyzeBtn.style.opacity = "0.5";
-
-
-    // Simulated AI processing
-    setTimeout(function () {
-
-        loading.style.display = "none";
-
+      mediaRecorder.ondataavailable = (e) => recordedChunks.push(e.data);
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: "audio/webm" });
+        selectedAudioSource = blob;
         analyzeBtn.disabled = false;
+        recordStatus.textContent = "Recording captured, ready to analyze";
+      };
 
-        analyzeBtn.style.opacity = "1";
-
-        // Demo result
-        const authenticityScore = Math.floor(
-            Math.random() * (97 - 82 + 1) + 82
-        );
-
-        showResult(authenticityScore);
-
-    }, 2500);
-
+      mediaRecorder.start();
+      isRecording = true;
+      recordBtn.classList.add("recording");
+      recordStatus.textContent = "Recording... tap to stop";
+    } catch (err) {
+      recordStatus.textContent = "Microphone access denied or unavailable";
+    }
+  } else {
+    mediaRecorder.stop();
+    mediaRecorder.stream.getTracks().forEach((track) => track.stop());
+    isRecording = false;
+    recordBtn.classList.remove("recording");
+  }
 });
 
+analyzeBtn.addEventListener("click", async () => {
+  if (!selectedAudioSource) return;
 
-// ================================
-// SHOW RESULT
-// ================================
+  analyzeBtn.disabled = true;
+  analyzeBtn.textContent = "Analyzing...";
 
-function showResult(authenticityScore) {
+  const result = await analyzeAudio(selectedAudioSource);
 
-    score.textContent = authenticityScore;
+  analyzeBtn.textContent = "Analyze voice";
+  analyzeBtn.disabled = false;
 
+  showResult(result);
+});
 
-    // Convert percentage to circle angle
-    const angle = authenticityScore * 3.6;
+async function analyzeAudio(audioSource) {
+  await new Promise((resolve) => setTimeout(resolve, 1200));
 
-    scoreCircle.style.background = `
-        conic-gradient(
-            #32d9ff ${angle}deg,
-            #536fff ${angle}deg,
-            #172333 ${angle}deg
-        )
-    `;
+  return {
+    label: "UNKNOWN",
+    confidence: 0,
+  };
+}
+function showResult(result) {
+  resultCard.classList.remove("hidden", "state-real", "state-fake");
 
+  if (result.label === "REAL") {
+    resultCard.classList.add("state-real");
+    resultLabel.textContent = "Likely a real human voice";
+  } else if (result.label === "FAKE") {
+    resultCard.classList.add("state-fake");
+    resultLabel.textContent = "Likely an AI-generated voice";
+  } else {
+    resultLabel.textContent = "Result unavailable (backend not connected)";
+  }
 
-    if (authenticityScore >= 85) {
+  resultSub.textContent = result.confidence
+    ? `Confidence: ${result.confidence}%`
+    : "Connect the backend to see a real confidence score";
 
-        // HUMAN VOICE
-        risk.textContent = "LOW";
+  confidenceFill.style.width = `${result.confidence || 0}%`;
 
-        risk.style.color = "#32ff9c";
-
-        riskDot.style.background = "#32ff9c";
-
-        riskDot.style.boxShadow =
-            "0 0 15px #32ff9c";
-
-        resultMessage.textContent =
-            "✓ Likely Human Voice — No significant synthetic indicators detected.";
-
-    }
-
-    else if (authenticityScore >= 60) {
-
-        // SUSPICIOUS
-        risk.textContent = "MEDIUM";
-
-        risk.style.color = "#ffd166";
-
-        riskDot.style.background = "#ffd166";
-
-        riskDot.style.boxShadow =
-            "0 0 15px #ffd166";
-
-        resultMessage.textContent =
-            "⚠ Suspicious Voice — Some synthetic voice characteristics detected.";
-
-    }
-
-    else {
-
-        // AI / DEEPFAKE
-        risk.textContent = "HIGH";
-
-        risk.style.color = "#ff4d6d";
-
-        riskDot.style.background = "#ff4d6d";
-
-        riskDot.style.boxShadow =
-            "0 0 15px #ff4d6d";
-
-        resultMessage.textContent =
-            "🚨 Potential AI-generated voice detected.";
-
-    }
-
+  resultCard.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
+resetBtn.addEventListener("click", () => {
+  resetSelection();
+  resultCard.classList.add("hidden");
+});
 
-// ================================
-// NAVIGATION
-// ================================
-
-function scrollToAnalysis() {
-
-    document
-        .getElementById("analysis")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
+function resetSelection() {
+  selectedAudioSource = null;
+  fileInput.value = "";
+  fileNameEl.textContent = "";
+  analyzeBtn.disabled = true;
+  recordStatus.textContent = "Tap to start recording";
 }
-
-function scrollToHow() {
-
-    document
-        .getElementById("how")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-// ================================
-// SIMPLE LIVE WAVE EFFECT
-// ================================
-
-const scanner = document.querySelector(".scanner");
-
-setInterval(function () {
-
-    scanner.style.transform =
-        "scale(" + (1 + Math.random() * 0.015) + ")";
-
-}, 700);
-
-
-// ================================
-// SYSTEM STATUS
-// ================================
-
-console.log(
-    "%c CLONE-CATCH SECURITY ENGINE ",
-    "color:#32d9ff;font-size:18px;font-weight:bold;"
-);
-
-console.log(
-    "Voice Security Interface Initialized."
-);
