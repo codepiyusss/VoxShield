@@ -1,19 +1,3 @@
-"""
-train_model.py  (IMPROVED VERSION)
-=====================================
-This script:
-1. Loads your real and fake audio files
-2. Balances the dataset (since you have 2277 real vs 437 fake)
-3. Extracts MFCC features from each file
-4. Trains TWO different classifiers and compares them
-5. Uses cross-validation for a trustworthy accuracy number
-6. Saves whichever model performs better
-
-HOW TO RUN:
-    pip install -r requirements.txt
-    python train_model.py
-"""
-
 import os
 import random
 import time
