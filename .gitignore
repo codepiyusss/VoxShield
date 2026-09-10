@@ -3,6 +3,10 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+dataset/
+*.wav
+voice_model.pkl
+
 # C extensions
 *.so
 
