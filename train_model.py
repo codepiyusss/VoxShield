@@ -58,7 +58,6 @@ def load_dataset():
 
     return np.array(features), np.array(labels)
 
-
 def train_and_compare(X_train, X_test, y_train, y_test):
     results = {}
 
