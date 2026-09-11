@@ -29,7 +29,7 @@ Given a short audio clip (live microphone input or uploaded file), VoxShield:
 3. Outputs a REAL or FAKE prediction with a confidence score
 =======
 3. Outputs a REAL or FAKE prediction with a confidence score 
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
+
 
 ## Pipeline
 
@@ -73,7 +73,7 @@ Output: REAL or FAKE, with confidence score
 
 The model is trained on a combination of:
 
-<<<<<<< HEAD
+
 - Real voice samples: sourced from the IndieFake Dataset, and few of found by team
 - Fake voice samples: synthetically generated using Microsoft Edge text-to-speech, using Indian-accented English and Hindi voices, to ensure the fake class reflects realistic Indian-context synthetic speech
 
@@ -83,7 +83,7 @@ Dataset was balanced across both classes before training to avoid classifier bia
 - Fake voice samples: synthetically generated using Microsoft Edge text-to-speech, using Indian-accented English and Hindi voices, to ensure the fake class reflects realistic Indian-context synthetic speech
 
 Dataset was balanced across both classes before training to avoid classifier bias toward the majority classes.
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
+
 
 ## How It Works
 
