@@ -40,7 +40,6 @@ def extract_features_from_array(audio):
     mfccs_mean = np.mean(mfccs.T, axis=0)
     return mfccs_mean.reshape(1, -1)   # reshape for a single prediction
 
-
 def record_chunk():
     """Records CHUNK_SECONDS of audio from the default microphone."""
     print(f"\n[Listening for {CHUNK_SECONDS} seconds... speak now]")
