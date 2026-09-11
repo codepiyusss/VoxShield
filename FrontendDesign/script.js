@@ -1,36 +1,26 @@
 const tabButtons = document.querySelectorAll(".tab-btn");
-<<<<<<< HEAD
-
 const panels = {
   upload: document.getElementById("panel-upload"),
   record: document.getElementById("panel-record")
-=======
 const panels = {
   upload: document.getElementById("panel-upload"),
   record: document.getElementById("panel-record"),
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 };
 
 const dropzone = document.getElementById("dropzone");
 const fileInput = document.getElementById("file-input");
 const fileNameEl = document.getElementById("file-name");
 const analyzeBtn = document.getElementById("analyze-btn");
-<<<<<<< HEAD
-const recordBtn = document.getElementById("record-btn");
-const recordStatus = document.getElementById("record-status");
-=======
 
 const recordBtn = document.getElementById("record-btn");
 const recordStatus = document.getElementById("record-status");
-
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
+const recordBtn = document.getElementById("record-btn");
+const recordStatus = document.getElementById("record-status");
 const resultCard = document.getElementById("result-card");
 const resultLabel = document.getElementById("result-label");
 const resultSub = document.getElementById("result-sub");
 const confidenceFill = document.getElementById("confidence-fill");
 const resetBtn = document.getElementById("reset-btn");
-
-<<<<<<< HEAD
 let selectedAudioSource = null;
 
 let mediaRecorder = null;
@@ -74,7 +64,6 @@ tabButtons.forEach((btn) => {
         resizeCanvas();
       }, 50);
     }
-=======
 let selectedAudioSource = null; // holds either an uploaded File or recorded
 
 tabButtons.forEach((btn) => {
@@ -88,7 +77,6 @@ tabButtons.forEach((btn) => {
     });
 
     resetSelection();
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
   });
 });
 
@@ -109,14 +97,10 @@ dropzone.addEventListener("dragleave", () => {
 
 dropzone.addEventListener("drop", (e) => {
   e.preventDefault();
-<<<<<<< HEAD
 
   dropzone.style.borderColor =
     "var(--color-border)";
-
-=======
   dropzone.style.borderColor = "var(--color-border)";
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
   if (e.dataTransfer.files.length > 0) {
     setSelectedFile(e.dataTransfer.files[0]);
   }
@@ -128,7 +112,6 @@ function setSelectedFile(file) {
   analyzeBtn.disabled = false;
 }
 
-<<<<<<< HEAD
 function resizeCanvas() {
   if (!canvas) return;
 
@@ -575,4 +558,3 @@ function resetSelection() {
   analyzeBtn.disabled = true;
   recordStatus.textContent = "Tap to start recording";
 }
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
