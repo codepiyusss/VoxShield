@@ -2,8 +2,5 @@ librosa
 scikit-learn
 numpy
 sounddevice
-<<<<<<< HEAD
 joblib
-=======
-joblib
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
+
