@@ -8,7 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 <body>
 
   <header class="site-header">
@@ -19,7 +22,10 @@
         </svg>
         <span class="logo-text">VoxShield</span>
       </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
       <span class="header-tag">Voice clone detection</span>
     </div>
   </header>
@@ -28,16 +34,21 @@
 
     <section class="hero">
       <h1>Is this voice real, or AI-generated?</h1>
+<<<<<<< HEAD
 
       <p class="hero-sub">
         Upload a short audio clip and VoxShield will check whether
         it's a genuine human voice or a synthetic clone.
       </p>
+=======
+      <p class="hero-sub">Upload a short audio clip and VoxShield will check whether it's a genuine human voice or a synthetic clone.</p>
+>>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
     </section>
 
     <section class="card upload-card">
 
       <div class="tabs">
+<<<<<<< HEAD
         <button class="tab-btn active" data-tab="upload" type="button">
           Upload file
         </button>
@@ -51,11 +62,20 @@
 
         <label for="file-input" class="dropzone" id="dropzone">
 
+=======
+        <button class="tab-btn active" data-tab="upload" type="button">Upload file</button>
+        <button class="tab-btn" data-tab="record" type="button">Record live</button>
+      </div>
+
+      <div class="tab-panel" id="panel-upload">
+        <label for="file-input" class="dropzone" id="dropzone">
+>>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
           <svg class="icon icon-xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>
             <polyline points="7 9 12 4 17 9"></polyline>
             <line x1="12" y1="4" x2="12" y2="16"></line>
           </svg>
+<<<<<<< HEAD
 
           <p class="dropzone-title">Drop an audio file here</p>
 
@@ -77,11 +97,24 @@
 
           <button class="record-btn" id="record-btn" type="button">
 
+=======
+          <p class="dropzone-title">Drop an audio file here</p>
+          <p class="dropzone-sub">or click to browse — WAV, MP3</p>
+          <input type="file" id="file-input" accept="audio/*" hidden>
+        </label>
+        <p class="file-name" id="file-name"></p>
+      </div>
+
+      <div class="tab-panel hidden" id="panel-record">
+        <div class="record-area">
+          <button class="record-btn" id="record-btn" type="button">
+>>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
             <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="9" y="3" width="6" height="11" rx="3"></rect>
               <path d="M5 11a7 7 0 0 0 14 0"></path>
               <line x1="12" y1="18" x2="12" y2="22"></line>
             </svg>
+<<<<<<< HEAD
 
           </button>
 
@@ -103,6 +136,11 @@
           Microphone is not active
         </p>
 
+=======
+          </button>
+          <p class="record-status" id="record-status">Tap to start recording</p>
+        </div>
+>>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
       </div>
 
       <button class="btn btn-primary btn-full" id="analyze-btn" type="button" disabled>
@@ -112,13 +150,18 @@
     </section>
 
     <section class="card result-card hidden" id="result-card">
+<<<<<<< HEAD
 
       <div class="result-header">
 
+=======
+      <div class="result-header">
+>>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
         <svg class="icon icon-lg" id="result-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="9 12 11 14 15 10"></polyline>
         </svg>
+<<<<<<< HEAD
 
         <div>
 
@@ -146,17 +189,35 @@
 
     <section class="card status-card">
 
+=======
+        <div>
+          <p class="result-label" id="result-label">Real human voice</p>
+          <p class="result-sub" id="result-sub">Confidence: 92%</p>
+        </div>
+      </div>
+      <div class="confidence-bar">
+        <div class="confidence-fill" id="confidence-fill"></div>
+      </div>
+      <button class="btn btn-secondary btn-full" id="reset-btn" type="button">Analyze another clip</button>
+    </section>
+
+    <section class="card status-card">
+>>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"></circle>
         <line x1="12" y1="8" x2="12" y2="12"></line>
         <line x1="12" y1="16" x2="12.01" y2="16"></line>
       </svg>
+<<<<<<< HEAD
 
       <p>
         This demo interface is not yet connected to the detection model.
         Analysis results shown here are placeholders until the backend is wired up.
       </p>
 
+=======
+      <p>This demo interface is not yet connected to the detection model. Analysis results shown here are placeholders until the backend is wired up.</p>
+>>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
     </section>
 
   </main>
@@ -166,6 +227,11 @@
   </footer>
 
   <script src="script.js"></script>
+<<<<<<< HEAD
 
 </body>
 </html>
+=======
+</body>
+</html>
+>>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
