@@ -25,9 +25,9 @@ Given a short audio clip (live microphone input or uploaded file), VoxShield:
 
 1. Converts the raw audio into a numerical representation through MFCC features
 2. Feeds those features into a trained classifier
-<<<<<<< HEAD
+   
 3. Outputs a REAL or FAKE prediction with a confidence score
-=======
+   
 3. Outputs a REAL or FAKE prediction with a confidence score 
 
 
