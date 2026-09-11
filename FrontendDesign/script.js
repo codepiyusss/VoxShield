@@ -20,7 +20,6 @@ const resetBtn = document.getElementById("reset-btn");
 
 let selectedAudioSource = null; // holds either an uploaded File or recorded
 
-
 tabButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     tabButtons.forEach((b) => b.classList.remove("active"));
