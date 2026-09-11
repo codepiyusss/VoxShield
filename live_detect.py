@@ -1,6 +1,5 @@
 """
 live_detect.py
-================
 STEP 2 of the project. Run this AFTER train_model.py has created voice_model.pkl.
 
 WHAT THIS DOES (in plain English):
@@ -39,11 +38,6 @@ def extract_features_from_array(audio):
     mfccs = librosa.feature.mfcc(y=audio, sr=SAMPLE_RATE, n_mfcc=40)
     mfccs_mean = np.mean(mfccs.T, axis=0)
     return mfccs_mean.reshape(1, -1)   # reshape for a single prediction
-
-<<<<<<< HEAD
-
-=======
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 def record_chunk():
     """Records CHUNK_SECONDS of audio from the default microphone."""
     print(f"\n[Listening for {CHUNK_SECONDS} seconds... speak now]")
@@ -79,7 +73,6 @@ def main():
 
     except KeyboardInterrupt:
         print("\n\nStopped by user. Goodbye!")
-
 
 if __name__ == "__main__":
     main()
