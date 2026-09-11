@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 :root {
   --color-bg: #07111f;
   --color-surface: #0d1b2e;
@@ -14,7 +13,6 @@
   --radius-sm: 8px;
   --radius-md: 10px;
   --radius-lg: 14px;
-=======
 
 :root {
   --color-bg: #FAFAFA;
@@ -32,8 +30,6 @@
   --radius-sm: 8px;
   --radius-md: 10px;
   --radius-lg: 14px;
-
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
   --font-body: 'Inter', -apple-system, sans-serif;
 }
 
@@ -45,7 +41,6 @@
 
 body {
   font-family: var(--font-body);
-<<<<<<< HEAD
   background:
     radial-gradient(circle at 50% 0%, rgba(0, 188, 212, 0.10), transparent 35%),
     linear-gradient(135deg, #050d18, #08182b, #07111f);
@@ -53,12 +48,10 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
-=======
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 }
 
 .container {
@@ -88,9 +81,8 @@ body {
 <<<<<<< HEAD
   background: rgba(5, 13, 24, 0.85);
   backdrop-filter: blur(12px);
-=======
+
   background: var(--color-surface);
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 }
 
 .header-inner {
@@ -139,29 +131,24 @@ body {
 }
 
 .card {
-<<<<<<< HEAD
   background: linear-gradient(145deg, rgba(15, 32, 52, 0.96), rgba(8, 22, 38, 0.96));
-=======
+
   background: var(--color-surface);
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 24px;
   margin-bottom: 20px;
-<<<<<<< HEAD
+
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-=======
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
+
 }
 
 .tabs {
   display: flex;
   gap: 6px;
-<<<<<<< HEAD
   background: #071525;
-=======
   background: var(--color-bg);
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
+
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 4px;
@@ -182,24 +169,17 @@ body {
 }
 
 .tab-btn.active {
-<<<<<<< HEAD
   background: #132a42;
   color: var(--color-text);
   box-shadow: 0 0 12px rgba(0, 188, 212, 0.12);
-=======
   background: var(--color-surface);
   color: var(--color-text);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 }
 
 .hidden {
   display: none;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 .dropzone {
   display: flex;
   flex-direction: column;
@@ -207,27 +187,22 @@ body {
   text-align: center;
   gap: 6px;
   padding: 36px 20px;
-<<<<<<< HEAD
   border: 2px dashed #29435f;
   border-radius: var(--radius-md);
   cursor: pointer;
   color: var(--color-text-muted);
   transition: 0.25s;
-=======
+
   border: 2px dashed var(--color-border);
   border-radius: var(--radius-md);
   cursor: pointer;
   color: var(--color-text-muted);
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 }
 
 .dropzone:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
-<<<<<<< HEAD
   background: rgba(0, 188, 212, 0.04);
-=======
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 }
 
 .dropzone-title {
@@ -267,7 +242,6 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-<<<<<<< HEAD
   box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.08);
   transition: 0.2s;
 }
@@ -278,12 +252,11 @@ body {
 
 .record-btn.recording {
   background: #dc2626;
-=======
+
 }
 
 .record-btn.recording {
   background: var(--color-danger);
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
   animation: pulse 1.4s infinite;
 }
 
@@ -300,11 +273,9 @@ body {
   100% {
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
   }
-=======
   0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.35); }
   70% { box-shadow: 0 0 0 12px rgba(220, 38, 38, 0); }
   100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 }
 
 .record-status {
@@ -312,7 +283,6 @@ body {
   color: var(--color-text-muted);
 }
 
-<<<<<<< HEAD
 .waveform-container {
   width: 100%;
   height: 220px;
@@ -362,9 +332,6 @@ body {
   font-size: 13px;
   text-align: center;
 }
-
-=======
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 .btn {
   font-family: inherit;
   font-size: 15px;
@@ -382,17 +349,14 @@ body {
 
 .btn-primary {
   background: var(--color-accent);
-<<<<<<< HEAD
   color: #03131a;
   box-shadow: 0 0 15px rgba(0, 188, 212, 0.15);
 =======
   color: white;
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 }
 
 .btn-primary:hover:not(:disabled) {
   background: var(--color-accent-hover);
-<<<<<<< HEAD
   color: white;
 }
 
@@ -405,7 +369,7 @@ body {
 
 .btn-secondary {
   background: #0a1727;
-=======
+
 }
 
 .btn-primary:disabled {
@@ -416,17 +380,15 @@ body {
 
 .btn-secondary {
   background: var(--color-bg);
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
   color: var(--color-text);
   border: 1px solid var(--color-border);
 }
 
 .btn-secondary:hover {
-<<<<<<< HEAD
+
   background: #102238;
-=======
   background: var(--color-border);
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
+
 }
 
 .result-header {
@@ -459,11 +421,9 @@ body {
   width: 100%;
   height: 8px;
   border-radius: 999px;
-<<<<<<< HEAD
+
   background: #142438;
-=======
   background: var(--color-bg);
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
   overflow: hidden;
   margin-bottom: 4px;
 }
@@ -490,23 +450,16 @@ body {
   gap: 12px;
   font-size: 13px;
   color: var(--color-text-muted);
-<<<<<<< HEAD
   background: rgba(8, 22, 38, 0.7);
-=======
   background: var(--color-bg);
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 }
 
 .status-card .icon {
   color: var(--color-text-muted);
   margin-top: 1px;
 }
+/* Footer /*
 
-<<<<<<< HEAD
-=======
-/* Footer */
-
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 .site-footer {
   text-align: center;
   padding: 32px 0 48px;
@@ -514,16 +467,12 @@ body {
   font-size: 13px;
 }
 
-<<<<<<< HEAD
-=======
 /*Responsive */
 
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
 @media (max-width: 480px) {
   .hero h1 {
     font-size: 22px;
   }
-<<<<<<< HEAD
 
   .card {
     padding: 18px;
@@ -533,9 +482,7 @@ body {
     font-size: 11px;
   }
 }
-=======
   .card {
     padding: 18px;
   }
 }
->>>>>>> a2a7213f7482999d6a7af6870a3404efcddc4033
