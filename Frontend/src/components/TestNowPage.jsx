@@ -43,7 +43,56 @@ function SiriWaveform({ active }) {
   );
 }
 
+// CONNECT BACKEND: points at your deployed Flask backend.
 const BACKEND_URL = "https://voxshield-dnck.onrender.com/predict";
+
+// Converts any recorded audio Blob into a plain WAV file, entirely in
+// the browser. This matters because MediaRecorder saves recordings as
+// webm/opus, which the backend's librosa cannot decode without ffmpeg
+// (not available on the free hosting tier). Uploaded files already
+// work because they're typically already wav/mp3. Converting to WAV
+// here means the backend only ever receives a format it can always read.
+async function convertBlobToWav(blob) {
+  const arrayBuffer = await blob.arrayBuffer();
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+  const numChannels = 1; // mono is enough for voice analysis
+  const sampleRate = audioBuffer.sampleRate;
+  const samples = audioBuffer.getChannelData(0);
+
+  const buffer = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(buffer);
+
+  const writeString = (offset, string) => {
+    for (let i = 0; i < string.length; i++) view.setUint8(offset + i, string.charCodeAt(i));
+  };
+
+  writeString(0, "RIFF");
+  view.setUint32(4, 36 + samples.length * 2, true);
+  writeString(8, "WAVE");
+  writeString(12, "fmt ");
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true); // PCM
+  view.setUint16(22, numChannels, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * numChannels * 2, true);
+  view.setUint16(32, numChannels * 2, true);
+  view.setUint16(34, 16, true);
+  writeString(36, "data");
+  view.setUint32(40, samples.length * 2, true);
+
+  let offset = 44;
+  for (let i = 0; i < samples.length; i++) {
+    const sample = Math.max(-1, Math.min(1, samples[i]));
+    view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7fff, true);
+    offset += 2;
+  }
+
+  audioContext.close();
+  return new Blob([buffer], { type: "audio/wav" });
+}
+
 export default function TestNowPage({ onBack, onNavigate }) {
   const [recording, setRecording] = useState(false);
   const [recordedAudio, setRecordedAudio] = useState(null);
@@ -82,16 +131,28 @@ export default function TestNowPage({ onBack, onNavigate }) {
   };
 
   const analyze = async () => {
-    const audioSource = uploadedFile || recordedBlobRef.current;
-    if (!audioSource) return;
+    const isRecording = !uploadedFile && recordedBlobRef.current;
+    if (!uploadedFile && !recordedBlobRef.current) return;
 
     setAnalyzing(true);
     setError("");
     setResult(null);
 
     try {
+      let audioSource;
+      let filename;
+
+      if (isRecording) {
+        // Convert the webm recording to WAV so the backend can read it
+        audioSource = await convertBlobToWav(recordedBlobRef.current);
+        filename = "recording.wav";
+      } else {
+        audioSource = uploadedFile;
+        filename = uploadedFile.name;
+      }
+
       const formData = new FormData();
-      formData.append("audio", audioSource, uploadedFile ? uploadedFile.name : "recording.webm");
+      formData.append("audio", audioSource, filename);
 
       const response = await fetch(BACKEND_URL, { method: "POST", body: formData });
 
@@ -102,7 +163,7 @@ export default function TestNowPage({ onBack, onNavigate }) {
       const data = await response.json();
       setResult({ label: data.result, confidence: data.confidence });
     } catch {
-      setError("Could not reach the VoxShield backend. Make sure app.py is running on localhost:5000.");
+      setError("Could not reach the VoxShield backend. Make sure it's running and reachable.");
     } finally {
       setAnalyzing(false);
     }
