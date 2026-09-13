@@ -3,4 +3,6 @@ scikit-learn
 numpy
 sounddevice
 joblib
-
+flask
+flask-cors
+gunicorn
