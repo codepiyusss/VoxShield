@@ -43,10 +43,7 @@ function SiriWaveform({ active }) {
   );
 }
 
-// CONNECT BACKEND: points at your Flask app.py running on localhost:5000.
-// Change this if you deploy the backend somewhere else later.
-const BACKEND_URL = "http://localhost:5000/predict";
-
+const BACKEND_URL = "https://voxshield-dnck.onrender.com/predict";
 export default function TestNowPage({ onBack, onNavigate }) {
   const [recording, setRecording] = useState(false);
   const [recordedAudio, setRecordedAudio] = useState(null);
