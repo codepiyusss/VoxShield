@@ -10,7 +10,7 @@ from flask_cors import CORS
 MODEL_PATH = "voice_model.pkl"
 N_MFCC = 40  # must match the value used in train_model.py
 
-app = Flask(_name_)
+app = Flask(__name__)
 CORS(app)  # allows your frontend (opened as a local HTML file or
            # served separately) to make requests to this server
 
@@ -67,5 +67,5 @@ def health():
     return jsonify({"status": "ok", "model_loaded": True})
 
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     app.run(debug=True, port=5000)
