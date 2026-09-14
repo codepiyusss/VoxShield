@@ -97,7 +97,7 @@ export function SiteNav({ onNavigate, onBack }) {
     <nav className="fixed left-0 right-0 top-0 z-30 flex items-center justify-between px-6 py-5 md:px-12">
       <button onClick={() => onNavigate("landing")} className="flex items-center gap-2 text-white">
         <WaveformMark />
-        <span className="text-lg font-extrabold tracking-tight">Voxshield</span>
+        <span className="text-lg font-extrabold tracking-tight">VoxShield</span>
       </button>
       <div className="flex items-center gap-3 rounded-full border border-white/20 bg-black/35 px-4 py-2 text-xs text-white/70 shadow-lg backdrop-blur-xl md:gap-6 md:px-6 md:py-3 md:text-sm">
         <button onClick={() => onNavigate("test")} className="transition-colors hover:text-white">Test Now</button>
