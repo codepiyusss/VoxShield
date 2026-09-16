@@ -129,7 +129,7 @@ This project currently focuses on detection only. The following are identified a
 - Automated prevention actions such as call blocking or alerts
 - Subscription or paid feature tiers
 
-## Related Work
+## Related Works
 
 This project is informed by and builds on findings from recent academic research in deepfake voice detection, including:
 
