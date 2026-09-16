@@ -30,7 +30,6 @@ def extract_features(file_path):
     mfccs_mean = np.mean(mfccs.T, axis=0)
     return mfccs_mean.reshape(1, -1)  # reshape for a single prediction
 
-
 @app.route("/predict", methods=["POST"])
 def predict():
     if "audio" not in request.files:
@@ -65,7 +64,6 @@ def predict():
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({"status": "ok", "model_loaded": True})
-
 
 if __name__ == "_main_":
     app.run(debug=True, port=5000)
