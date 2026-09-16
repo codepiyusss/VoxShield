@@ -147,6 +147,5 @@ def main():
     print(f"\nTotal time taken: {elapsed:.1f} seconds")
     print("\nDone! You can now run live_detect.py to test it live.")
 
-
 if __name__ == "__main__":
     main()
