@@ -17,7 +17,7 @@ VoxShield is a machine learning based system who listens to short chunks of live
 
 ## Problem Statement
 
-AI voice cloning tools have advanced to the point where synthetic speech can convincingly imitate a real person's tone, pitch, and speaking style. This is increasingly exploited for financial fraud, impersonation scams, and misinformation. Most existing detection research and datasets are trained primarily on Western-accented English speech, leaving a significant gap for Indian speakers and Indian-accented voices, which are common targets for scam calls in the Indian context.
+AI voice cloning tools have advanced to the point where synthetic speech can convincingly imitate a real person's tone, pitch, and speaking style. This is increasingly exploited for financial fraud, impersonation scams, and misinformation. Most existing detection research and datasets are trained primarily on Western-accented English speech, leaving a significant gap for Indian speakers and Indian-Accented voices, which are common targets for scam calls in the Indian context.
 
 ## What This Project Does
 
