@@ -133,7 +133,7 @@ This project currently focuses on detection only. The following are identified a
 
 This project is informed by and builds on findings from recent academic research in deepfake voice detection, including:
 
-## Team
+## Team Members
 
 - [Piyush Tiwari](https://github.com/codepiyusss) (Leader)
 - [Siddhartha Kumar](https://github.com/DevSid740)
