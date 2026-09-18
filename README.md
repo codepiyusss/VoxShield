@@ -74,7 +74,7 @@ Output: REAL or FAKE, with confidence score
 The model is trained on a combination of:
 
 
-- Real voice samples: sourced from the IndieFake Dataset, and few of found by team
+- Real voice samples: sourced from the IndieFake and Hinglish Dataset, and few of found by team
 - Fake voice samples: synthetically generated using Microsoft Edge text-to-speech, using Indian-accented English and Hindi voices, to ensure the fake class reflects realistic Indian-context synthetic speech
 
 Dataset was balanced across both classes before training to avoid classifier bias toward the majority class.
