@@ -11,7 +11,7 @@ The following table details which versions of VoxShield are currently supported 
 
 ## Reporting a Vulnerability
 
-We take the security of [VoxShield](https://github.com/codepiyusss/VoxShield) seriously. If you discover a security vulnerability, please do not disclose it publicly by creating a public issue or discussion.
+We take the security of [VoxShield](https://github.com/codepiyusss/VoxShield) seriously. If you discover a security vulnerability, please do not disclose it publicly by creating a public issue or any discussion on it.
 
 ### How to Report
 
