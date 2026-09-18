@@ -21,7 +21,7 @@ AI voice cloning tools have advanced to the point where synthetic speech can con
 
 ## What This Project Does
 
-Give a short audio clip (live microphone input or uploaded file), VoxShield:
+Givea short audio clip (live microphone input or uploaded file), VoxShield:
 
 1. Converts the raw audio into a numerical representation through MFCC features
 2. Feeds those features into a trained classifier
