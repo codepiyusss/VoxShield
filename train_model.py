@@ -8,23 +8,63 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import joblib
 
+
 DATASET_DIR = "dataset"
 MODEL_OUTPUT_PATH = "voice_model.pkl"
-MAX_REAL_FILES = 1600
-N_MFCC = 40
-RANDOM_SEED = 42
+MAX_REAL_FILES = None 
+N_MFCC = 40             # number of MFCC coefficients per file
+RANDOM_SEED = 42        # keeps results reproducible every run
+
+
+# ----------------------------------------------------------------------
+# STEP 1: Feature extraction (turns one audio file into one row of numbers)
+# ----------------------------------------------------------------------
 def extract_features(file_path):
     try:
-        audio, sample_rate = librosa.load(file_path, sr=16000)
-        mfccs = librosa.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=N_MFCC)
-        mfccs_mean = np.mean(mfccs.T, axis=0)
-        return mfccs_mean
+        audio, sr = librosa.load(file_path, sr=16000)
+
+        mfcc = np.mean(librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=N_MFCC).T, axis=0)
+
+        mel = librosa.feature.melspectrogram(y=audio, sr=sr, n_mels=40)
+        mel_db = librosa.power_to_db(mel)
+        mel_mean = np.mean(mel_db.T, axis=0)
+
+        centroid = np.mean(librosa.feature.spectral_centroid(y=audio, sr=sr))
+        bandwidth = np.mean(librosa.feature.spectral_bandwidth(y=audio, sr=sr))
+        rolloff = np.mean(librosa.feature.spectral_rolloff(y=audio, sr=sr))
+        contrast = np.mean(librosa.feature.spectral_contrast(y=audio, sr=sr).T, axis=0)
+
+        pitch_values = librosa.yin(audio, fmin=50, fmax=500, sr=sr)
+        pitch_values = pitch_values[np.isfinite(pitch_values)]
+        pitch_mean = np.mean(pitch_values) if len(pitch_values) > 0 else 0.0
+
+        zcr = np.mean(librosa.feature.zero_crossing_rate(audio))
+
+        chroma = np.mean(librosa.feature.chroma_stft(y=audio, sr=sr).T, axis=0)
+
+        rms = np.mean(librosa.feature.rms(y=audio))
+
+        feature_vector = np.concatenate([
+            mfcc,
+            mel_mean,
+            [centroid, bandwidth, rolloff],
+            contrast,
+            [pitch_mean],
+            [zcr],
+            chroma,
+            [rms],
+        ])
+
+        return feature_vector
     except Exception as e:
         print(f"  [!] Skipped {file_path}: {e}")
         return None
 
-def load_dataset():
 
+# ----------------------------------------------------------------------
+# STEP 2: Load and balance the dataset
+# ----------------------------------------------------------------------
+def load_dataset():
     features = []
     labels = []
 
@@ -38,7 +78,6 @@ def load_dataset():
             continue
 
         files = [f for f in os.listdir(folder) if f.lower().endswith((".wav", ".mp3", ".flac"))]
-
         random.seed(RANDOM_SEED)
         random.shuffle(files)
 
@@ -59,6 +98,9 @@ def load_dataset():
     return np.array(features), np.array(labels)
 
 
+# ----------------------------------------------------------------------
+# STEP 3: Train and compare two models
+# ----------------------------------------------------------------------
 def train_and_compare(X_train, X_test, y_train, y_test):
     results = {}
 
@@ -84,6 +126,9 @@ def train_and_compare(X_train, X_test, y_train, y_test):
 
     return results
 
+
+# STEP 4: Cross-validation (a more trustworthy accuracy check)
+
 def run_cross_validation(model, X, y, model_name):
     scores = cross_val_score(model, X, y, cv=5)
     print(f"\n{model_name} 5-fold cross-validation scores: {scores}")
@@ -91,6 +136,9 @@ def run_cross_validation(model, X, y, model_name):
           f"(+/- {scores.std() * 100:.2f}%)")
     return scores.mean()
 
+
+
+# MAIN
 def main():
     start_time = time.time()
 
@@ -145,6 +193,7 @@ def main():
     elapsed = time.time() - start_time
     print(f"\nTotal time taken: {elapsed:.1f} seconds")
     print("\nDone! You can now run live_detect.py to test it live.")
+
 
 if __name__ == "__main__":
     main()
